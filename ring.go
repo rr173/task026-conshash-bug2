@@ -81,8 +81,8 @@ func (r *Ring) Add(node string) {
 		h := r.hash(virtualKey(node, i))
 		if _, exists := r.hashMap[h]; !exists {
 			r.ring = append(r.ring, h)
+			r.hashMap[h] = node
 		}
-		r.hashMap[h] = node
 	}
 	r.nodes[node] = true
 	sort.Slice(r.ring, func(i, j int) bool { return r.ring[i] < r.ring[j] })
